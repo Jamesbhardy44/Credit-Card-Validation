@@ -1,0 +1,80 @@
+
+V 1.0
+Luhn algorithm is not working correctly yet.
+
+valid numbers are showing as invalid.
+
+
+
+
+
+V 2.0
+
+NaN
+
+V 3.0
+
+!
+checked solution:
+
+in for loop we needed to have:
+-------------------------------
+
+ i = array.length -1; i >= 0;
+
+ and then: 
+ -------------------------------
+
+ if(array.length -1 -i % 2 ===1){ // if index is odd:
+    etc...
+ }
+
+findInvalidCards() appears to be working correctly.
+
+
+4.0
+==============================================================
+all requirements complete.   9/26/2022 -JH
+
+Can still be improved:
+
+we are not using the object with company name and cc digit 
+identifier.
+
+to scale this out, we would need that functionality.
+
+=============================================================
+
+
+/*
+Create a function, validateCred() 
+
+that has a parameter of an array. 
+
+validateCred() is to return true when an array contains digits of a valid credit card number 
+and false when it is invalid. 
+
+This function should NOT mutate the values of the original array.
+
+To find out if a credit card number is valid or not, use the Luhn algorithm: 
+
+=========================================================================================================================
+    the Luhn algorithm is a series of mathematical calculations used to validate certain identification numbers, 
+	e.g. credit card numbers. 
+
+    ------------------------------------------------------------------------------------
+    The calculations in the Luhn algorithm can be broken down as the following steps:
+
+1. Starting from the farthest digit to the right, AKA the check digit, iterate to the left.
+
+2. As you iterate to the left, every other digit is doubled (the check digit is not doubled). 
+
+3. If the number is greater than 9 after doubling, subtract 9 from its value.
+
+4. Sum up all the digits in the credit card number.
+
+5. If the sum modulo 10 is 0 then the number is valid, 
+
+	otherwise, it’s invalid.
+------------------------------------------------------------------------------------------
+*/
