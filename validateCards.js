@@ -34,7 +34,7 @@ const luhnAlgo = (array)=>{
     let total = 0;
     let lastElement = array.length -1;
     for (let i = lastElement; i >= 0; i--) {
-      if ((lastElement - i) % 2 === 1) {
+      if ((lastElement - i) % 2 === 1) {//if odd iteration:
         array[i] *= 2;
         if (array[i] > 9) {
             array[i] -= 9;
@@ -60,70 +60,66 @@ const findInvalidCards = (array)=>{
     }
 
 
-//---------------------------------------------------
-
-const cardCompanyTable = {
-    companies:{
-   Amex:{
+const companies = [
+    
+   Amex = {
     id : 3,
     coName : 'Amex (American Express)',
     corruptedCCNumbers : false
    },
-   Visa:{
+   Visa = {
     id : 4,
     coName : 'Visa',
     corruptedCCNumbers : false
    },
-   Mastercard:{
+   Mastercard = {
     id : 5,
     coName : 'Mastercard',
     corruptedCCNumbers : false
    },
-   Discover:{
+   Discover = {
     id : 6,
     coName : 'Discover',
     corruptedCCNumbers : false
    }
-}
-};
+
+];
 
 
-
-
-
-//-----------------------------------------------------
 const validateCred = (array)=>{
    let looned = luhnAlgo(array);
    return looned
 }
 
-const idInvalidCardCompanies = (array) =>{
+
+//object param should have properties of : id, coName .
+const idInvalidCardCompanies = (array, object) =>{
     let badCompanySet= new Set(); //entries must be unique
     let invalids = findInvalidCards(array);
     for(let i = 0; i < invalids.length; i++){
         
-        if(invalids[i][0]===3){
+        if(invalids[i][0]===object[0].id){
             console.log('invalid amex # found: ' + invalids[i][0])
-            badCompanySet.add('Amex (American Express)');
+            badCompanySet.add(object[0].coName);
             continue;
         }
-        if(invalids[i][0]===4){
+        if(invalids[i][0]===object[1].id){
             console.log('invalid visa # found: '+ invalids[i][0])
-            badCompanySet.add('Visa');
+            badCompanySet.add(object[1].coName);
             continue;
         }
-        if(invalids[i][0]===5){
+        if(invalids[i][0]===object[2].id){
             console.log('invalid mastercard # found: '+ invalids[i][0])
-            badCompanySet.add('Mastercard');
+            badCompanySet.add(object[2].coName);
             continue;
         }
-        if(invalids[i][0]===6){
+        if(invalids[i][0]===object[3].id){
             console.log('inv Discover # found: '+ invalids[i][0])
-            badCompanySet.add('Discover');
+            badCompanySet.add(object[3].coName);
             continue;
         }
         else{
-             console.warn(invalids[i][0] + ' company not found');
+             console.warn(invalids[i][0] + ' : id / company not found');
              continue;
         }
     }
@@ -167,4 +163,4 @@ console.log('result: '+ validateCred(invalid4));
 console.log('---------------')
 
 console.log(findInvalidCards(batch))
-console.log(idInvalidCardCompanies(batch))
+console.log(idInvalidCardCompanies(batch, companies))
