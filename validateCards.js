@@ -92,7 +92,7 @@ const validateCred = (array)=>{
 }
 
 
-//object param should have properties of : id, coName .
+//object param should have properties of : id, coName, corruptedCCNumbers .
 const idInvalidCardCompanies = (array, object) =>{
     let badCompanySet= new Set(); //entries must be unique
     let invalids = findInvalidCards(array);
@@ -101,21 +101,25 @@ const idInvalidCardCompanies = (array, object) =>{
         if(invalids[i][0]===object[0].id){
             console.log('invalid amex # found: ' + invalids[i][0])
             badCompanySet.add(object[0].coName);
+            object[0].corruptedCCNumbers = true;
             continue;
         }
         if(invalids[i][0]===object[1].id){
             console.log('invalid visa # found: '+ invalids[i][0])
             badCompanySet.add(object[1].coName);
+            object[1].corruptedCCNumbers = true;
             continue;
         }
         if(invalids[i][0]===object[2].id){
             console.log('invalid mastercard # found: '+ invalids[i][0])
             badCompanySet.add(object[2].coName);
+            object[2].corruptedCCNumbers = true;
             continue;
         }
         if(invalids[i][0]===object[3].id){
             console.log('inv Discover # found: '+ invalids[i][0])
             badCompanySet.add(object[3].coName);
+            object[3].corruptedCCNumbers = true;
             continue;
         }
         else{
@@ -123,6 +127,7 @@ const idInvalidCardCompanies = (array, object) =>{
              continue;
         }
     }
+        console.log('object properties updated: ' + JSON.stringify(object));
         return badCompanySet;
 }
 
